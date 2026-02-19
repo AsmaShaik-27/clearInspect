@@ -30,7 +30,6 @@ DATA = Path("data/processed/bottle_splits")
 OUT  = Path("outputs/models")
 OUT.mkdir(parents=True, exist_ok=True)
 
-# 320 helps small defects (contamination). If slow on CPU, use 256.
 IMG_SIZE = 320
 BATCH_SIZE = 16
 

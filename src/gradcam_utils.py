@@ -51,3 +51,41 @@ def overlay_cam_on_image(rgb_img: np.ndarray, cam: np.ndarray, alpha=0.45):
 
     overlay = (alpha * heatmap + (1 - alpha) * rgb_img).astype(np.uint8)
     return overlay
+
+def bottle_zone_explanation(cam: np.ndarray) -> str:
+    """
+    Simple bottle-specific zones using vertical bands:
+      - cap/neck: top 0-25%
+      - body/label: 25-80%
+      - base: 80-100%
+    Also reports whether hotspot is centered or edge.
+    """
+    h, w = cam.shape
+
+    def band_mean(y0, y1):
+        return float(cam[int(y0*h):int(y1*h), :].mean())
+
+    cap = band_mean(0.00, 0.25)
+    body = band_mean(0.25, 0.80)
+    base = band_mean(0.80, 1.00)
+
+    # left/center/right
+    left = float(cam[:, :w//3].mean())
+    center = float(cam[:, w//3:2*w//3].mean())
+    right = float(cam[:, 2*w//3:].mean())
+
+    zones = {"cap/neck": cap, "body/label": body, "base": base}
+    horiz = {"left": left, "center": center, "right": right}
+
+    top_zone = max(zones, key=zones.get)
+    top_side = max(horiz, key=horiz.get)
+
+    return (
+        f"Hotspot concentrated in **{top_zone}** region and **{top_side}** area "
+        f"(cap={cap:.3f}, body={body:.3f}, base={base:.3f})."
+    )
+def cam_peakiness(cam: np.ndarray) -> float:
+    # Higher when activation is concentrated (defect-like), lower when diffuse (good-like)
+    p95 = float(np.percentile(cam, 95))
+    mean = float(cam.mean())
+    return p95 - mean
