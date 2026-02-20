@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Defect Detection System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <header class="header">
+        <h1>Product Defect Detection System</h1>
+        <p class="subtitle">AI-Powered Quality Inspection</p>
+    </header>
+
+    <section class="upload-section">
+        <div class="upload-area" id="uploadArea">
+            <p>Click or Drag & Drop Image</p>
+            <input type="file" id="fileInput" accept="image/*" hidden>
+        </div>
+
+        <div class="preview-container" id="previewContainer" style="display:none;">
+            <img id="previewImage">
+            <button id="removeBtn">×</button>
+        </div>
+
+        <button id="analyzeBtn" disabled>Analyze Image</button>
+    </section>
+
+    <section class="results-section" id="resultsSection" style="display:none;">
+
+        <div class="images-row">
+            <div>
+                <h3>Original Image</h3>
+                <img id="originalImage">
+            </div>
+
+            <div>
+                <h3>Grad-CAM Heatmap</h3>
+                <img id="heatmapImage">
+            </div>
+        </div>
+
+        <div class="results-panel">
+            <div id="statusBadge">Waiting</div>
+            <p><strong>Defect Type:</strong> <span id="defectClass">--</span></p>
+            <p><strong>Severity:</strong> <span id="severityBadge">--</span></p>
+            <p><strong>Score:</strong> <span id="severityValue">--</span></p>
+        </div>
+
+    </section>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
