@@ -1,0 +1,23 @@
+{
+  "image": "C:\\DevProjects\\clearins\\clearInspect\\data\\web_uploads\\017.png",
+  "final_label": "UNCERTAIN",
+  "pred_class": "broken_small",
+  "confidence": 0.5084646344184875,
+  "top3": [
+    [
+      "broken_small",
+      0.5084646344184875
+    ],
+    [
+      "good",
+      0.22162972390651703
+    ],
+    [
+      "contamination",
+      0.21836096048355103
+    ]
+  ],
+  "explanation": "Hotspot concentrated in **body/label** region and **center** area (cap=0.036, body=0.190, base=0.009).",
+  "cam_overlay_path": "C:\\DevProjects\\clearins\\clearInspect\\outputs\\cams\\017_pred-broken_small_cam.jpg",
+  "uncertain_threshold": 0.6
+}

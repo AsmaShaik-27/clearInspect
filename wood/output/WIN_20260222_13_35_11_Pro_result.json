@@ -1,0 +1,6 @@
+{
+    "input_image": "data\\processed\\classification\\test\\good\\WIN_20260222_13_35_11_Pro.jpg",
+    "output_image": "output/WIN_20260222_13_35_11_Pro_gradcam.jpg",
+    "predicted_class": "combined",
+    "confidence": 0.4568619132041931
+}

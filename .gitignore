@@ -1,9 +1,52 @@
-venv/
-.venv/
+# ==============================
+# Python
+# ==============================
 __pycache__/
 *.pyc
-outputs/
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.env
+venv/
+.env/
+.idea/
+.vscode/
+
+# ==============================
+# Models
+# ==============================
 *.pth
+*.pt
+*.onnx
+*.h5
+*.ckpt
+
+# ==============================
+# Dataset
+# ==============================
+wood/data/
 data/
-.env
+dataset/
+
+# ==============================
+# Output
+# ==============================
+wood/output/
+output/
+
+# ==============================
+# React / Vite
+# ==============================
+node_modules/
+dist/
+build/
+frontend/node_modules/
+frontend/dist/
+
+# ==============================
+# OS Files
+# ==============================
 .DS_Store
+Thumbs.db

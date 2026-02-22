@@ -1,0 +1,6 @@
+{
+    "input_image": "data/raw/test/scratch/011.png",
+    "output_image": "output/011_gradcam.jpg",
+    "predicted_class": "scratch",
+    "confidence": 0.9998323917388916
+}

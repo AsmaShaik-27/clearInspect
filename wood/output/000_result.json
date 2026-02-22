@@ -1,0 +1,6 @@
+{
+    "input_image": "data/raw/test/liquid/000.png",
+    "output_image": "output/000_gradcam.jpg",
+    "predicted_class": "liquid",
+    "confidence": 0.9712681770324707
+}

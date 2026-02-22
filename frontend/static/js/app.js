@@ -1,68 +1,55 @@
-const uploadArea = document.getElementById('uploadArea');
-const fileInput = document.getElementById('fileInput');
-const previewContainer = document.getElementById('previewContainer');
-const previewImage = document.getElementById('previewImage');
-const removeBtn = document.getElementById('removeBtn');
-const analyzeBtn = document.getElementById('analyzeBtn');
 const resultsSection = document.getElementById('resultsSection');
-
-const originalImage = document.getElementById('originalImage');
-const heatmapImage = document.getElementById('heatmapImage');
-
 const defectClass = document.getElementById('defectClass');
 const severityBadge = document.getElementById('severityBadge');
 const severityValue = document.getElementById('severityValue');
 const statusBadge = document.getElementById('statusBadge');
 
-let selectedFile = null;
+const liveFeed = document.getElementById('liveFeed');
 
-uploadArea.addEventListener('click', () => fileInput.click());
+let statusInterval = null;
 
-fileInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+/* ------------------------
+   Start Camera
+------------------------- */
+function startCamera() {
+    liveFeed.src = "/video_feed";
+    resultsSection.style.display = "block";
 
-    selectedFile = file;
-    const reader = new FileReader();
-    reader.onload = () => {
-        previewImage.src = reader.result;
-        previewContainer.style.display = 'block';
-        analyzeBtn.disabled = false;
-    };
-    reader.readAsDataURL(file);
-});
+    // Start polling prediction status
+    statusInterval = setInterval(fetchStatus, 500);
+}
 
-removeBtn.addEventListener('click', () => {
-    selectedFile = null;
-    previewContainer.style.display = 'none';
-    analyzeBtn.disabled = true;
-});
+/* ------------------------
+   Stop Camera
+------------------------- */
+function stopCamera() {
+    liveFeed.src = "";
+    clearInterval(statusInterval);
+}
 
-analyzeBtn.addEventListener('click', async () => {
+/* ------------------------
+   Fetch Latest Prediction
+------------------------- */
+async function fetchStatus() {
+    try {
+        const response = await fetch("/api/live_status");
+        const data = await response.json();
 
-    const formData = new FormData();
-    formData.append('image', selectedFile);
+        if (!data.success) return;
 
-    const response = await fetch('/api/analyze', {
-        method: 'POST',
-        body: formData
-    });
+        defectClass.textContent = data.predicted_class;
+        severityBadge.textContent = data.severity_level;
+        severityValue.textContent = data.severity_score + " / 100";
 
-    const data = await response.json();
+        statusBadge.textContent = data.is_defective
+            ? "DEFECT DETECTED"
+            : "NO DEFECT";
 
-    if (!data.success) {
-        alert(data.error);
-        return;
+        statusBadge.style.backgroundColor = data.is_defective
+            ? "#e74c3c"
+            : "#2ecc71";
+
+    } catch (err) {
+        console.error("Live status error:", err);
     }
-
-    originalImage.src = data.original_url;
-    heatmapImage.src = data.heatmap_url;
-
-    defectClass.textContent = data.predicted_class;
-    severityBadge.textContent = data.severity_level;
-    severityValue.textContent = data.severity_score + " / 100";
-
-    statusBadge.textContent = data.is_defective ? "DEFECT DETECTED" : "NO DEFECT";
-
-    resultsSection.style.display = 'block';
-});
+}

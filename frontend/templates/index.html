@@ -14,18 +14,18 @@
     </header>
 
     <section class="upload-section">
-        <div class="upload-area" id="uploadArea">
-            <p>Click or Drag & Drop Image</p>
-            <input type="file" id="fileInput" accept="image/*" hidden>
-        </div>
 
-        <div class="preview-container" id="previewContainer" style="display:none;">
-            <img id="previewImage">
-            <button id="removeBtn">×</button>
-        </div>
+    <div class="live-container">
+        <h3>Live Camera Feed</h3>
+        <img id="liveFeed" src="/video_feed" width="600">
+    </div>
 
-        <button id="analyzeBtn" disabled>Analyze Image</button>
-    </section>
+    <div class="controls">
+        <button onclick="startCamera()">Start</button>
+        <button onclick="stopCamera()">Stop</button>
+    </div>
+
+</section>
 
     <section class="results-section" id="resultsSection" style="display:none;">
 
@@ -54,4 +54,4 @@
 
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
-</html>
+</html>  

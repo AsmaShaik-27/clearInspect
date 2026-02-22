@@ -1,0 +1,6 @@
+{
+    "input_image": "data/raw/test/color/005.png",
+    "output_image": "output/005_gradcam.jpg",
+    "predicted_class": "hole",
+    "confidence": 0.9606188535690308
+}

@@ -1,0 +1,26 @@
+{
+  "image": "C:\\DevProjects\\clearins\\clearInspect\\data\\web_uploads\\000.png",
+  "final_label": "contamination",
+  "decision": "REJECT",
+  "pred_class": "contamination",
+  "confidence": 0.8799623250961304,
+  "top3": [
+    [
+      "contamination",
+      0.8799623250961304
+    ],
+    [
+      "good",
+      0.08413595706224442
+    ],
+    [
+      "broken_large",
+      0.03452083468437195
+    ]
+  ],
+  "uncertain_threshold": 0.6,
+  "cam_peakiness": 0.6143372356891632,
+  "cam_note": "Normal CAM shown (conf=0.880, peak=0.614)",
+  "explanation": "Hotspot concentrated in body/label region and center area (cap=0.017, body=0.472, base=0.095).",
+  "overlay_path": "C:\\DevProjects\\clearins\\clearInspect\\outputs\\cams\\000_pred-contamination_overlay.jpg"
+}
