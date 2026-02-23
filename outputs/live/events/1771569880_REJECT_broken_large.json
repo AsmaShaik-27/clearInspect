@@ -1,9 +1,0 @@
-{
-  "timestamp": 1771569880,
-  "pred_class": "broken_large",
-  "confidence": 0.6772095561027527,
-  "final_label": "broken_large",
-  "decision": "REJECT",
-  "cam_peakiness": 0.39085620641708374,
-  "explanation": "Hotspot concentrated in base region and center area (cap=0.259, body=0.357, base=0.545)."
-}
